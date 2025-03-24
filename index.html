@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coinbase - Login</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0A0B0D;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            color: #d1d1d1;
+        }
+
+        .login-container {
+            background-color: #0A0B0D;
+            padding: 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #24252A;
+            border-radius: 16px;
+            width: 450px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .login-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        label {
+            font-size: 12px;
+            color: white;
+            font-weight: bold;
+            text-align: left;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 90%;
+            padding: 14px;
+            margin: 10px 0;
+            background-color: #0A0B0D;
+            border: 1px solid #24252A;
+            border-radius: 4px;
+            font-size: 14px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+        }
+
+        .black-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #578BFA;
+            color: #000000;
+            border: none;
+            border-radius: 16px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .black-button:hover {
+            background-color: #578BFA;
+        }
+
+        .line-separator {
+            margin: 20px 0;
+            font-size: 14px;
+            color: #fff;
+            position: relative;
+        }
+
+        .line-separator span {
+            margin: 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .line-separator::before, .line-separator::after {
+            content: "_______________";
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .line-separator::before {
+            left: 0;
+        }
+
+        .line-separator::after {
+            right: 0;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-buttons button {
+            width: 100%;
+            padding: 16px;
+            background-color: #32353D;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 15px;
+            cursor: pointer;
+            text-align: left;
+            padding-left: 20px;
+            font-weight: bold;
+        }
+
+        .action-buttons button:hover {
+            background-color: #2C2E32;
+        }
+
+        .info-text {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #A8A8A8;
+        }
+
+        .info-text a {
+            color: #A8A8A8;
+            text-decoration: none;
+            border-bottom: 1px solid #A8A8A8;
+        }
+
+        .info-text a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: auto;
+        }
+
+        .signup-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .signup-link:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <img src="home.png" alt="Logo" class="logo">
+    <a href="#" class="signup-link">Sign Up</a>
+
+    <div class="login-container" id="loginContainer">
+        <h1>Sign in to Coinbase</h1>
+        <form id="loginForm">
+            <label for="email" id="emailLabel">Email</label>
+            <input type="email" name="email" id="emailInput" placeholder="Email" required>
+            <button type="button" class="black-button" id="continueButton">Continue</button>
+        </form>
+
+        <div class="line-separator">
+            <span>OR</span>
+        </div>
+
+        <div class="action-buttons">
+            <button>Sign in with Access Key</button>
+            <button>Sign in with Google</button>
+            <button>Sign in with Apple</button>
+            <button>Sign in with Coinbase Wallet</button>
+        </div>
+
+        <div class="info-text">
+            <p>This device isn't yours? Use a private window. See our<br>
+            <a href="#">Privacy Policy</a> for more information.</p>
+        </div>
+    </div>
+
+    <script>
+        const continueButton = document.getElementById('continueButton');
+        const emailInput = document.getElementById('emailInput');
+        const emailLabel = document.getElementById('emailLabel');
+        const loginContainer = document.getElementById('loginContainer');
+
+        continueButton.addEventListener('click', () => {
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                alert('Please enter your email address.');
+                return;
+            }
+
+            // Add your email validation logic here
+            console.log('Email submitted:', email);
+        });
+    </script>
+</body>
+</html>
