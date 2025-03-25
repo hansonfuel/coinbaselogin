@@ -17,7 +17,6 @@
             height: 100vh;
             position: relative;
             color: #d1d1d1;
-            overflow-x: hidden;
         }
 
         .login-container {
@@ -31,8 +30,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            z-index: 1;
         }
 
         .login-container h1 {
@@ -71,8 +68,8 @@
         .black-button {
             width: 100%;
             padding: 14px;
-            background-color: #2F3336;
-            color: white;
+            background-color: #578BFA;
+            color: #000000;
             border: none;
             border-radius: 16px;
             font-size: 15px;
@@ -83,7 +80,7 @@
         }
 
         .black-button:hover {
-            background-color: #2F3336;
+            background-color: #578BFA;
         }
 
         .line-separator {
@@ -166,34 +163,25 @@
         }
 
         .logo {
-            position: fixed;
+            position: absolute;
             top: 20px;
             left: 20px;
             width: 40px;
             height: auto;
-            z-index: 2;
         }
 
         .signup-link {
-            position: fixed;
+            position: absolute;
             top: 20px;
             right: 20px;
             font-size: 14px;
             color: white;
             font-weight: bold;
             text-decoration: none;
-            z-index: 2;
         }
 
         .signup-link:hover {
             text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .login-container {
-                width: 90%;
-                padding: 20px;
-            }
         }
     </style>
 </head>
