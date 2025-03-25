@@ -51,7 +51,7 @@
             display: block;
         }
 
-        input[type="email"], input[type="password"] {
+        input[type="email"] {
             width: 90%;
             padding: 14px;
             margin: 10px 0;
@@ -131,10 +131,18 @@
             text-align: left;
             padding-left: 20px;
             font-weight: bold;
+            display: flex;
+            align-items: center;
         }
 
         .action-buttons button:hover {
             background-color: #2C2E32;
+        }
+
+        .action-buttons button img {
+            width: 20px;
+            margin-right: 10px;
+            height: auto;
         }
 
         .info-text {
@@ -177,15 +185,15 @@
     </style>
 </head>
 <body>
-    <img src="home.png" alt="Logo" class="logo">
+    <img src="coinbase-logo.png" alt="Coinbase Logo" class="logo">
     <a href="#" class="signup-link">Sign Up</a>
 
-    <div class="login-container" id="loginContainer">
+    <div class="login-container">
         <h1>Sign in to Coinbase</h1>
         <form id="loginForm">
-            <label for="email" id="emailLabel">Email</label>
+            <label for="email">Email</label>
             <input type="email" name="email" id="emailInput" placeholder="Email" required>
-            <button type="button" class="black-button" id="continueButton">Continue</button>
+            <button type="button" class="black-button">Continue</button>
         </form>
 
         <div class="line-separator">
@@ -193,10 +201,18 @@
         </div>
 
         <div class="action-buttons">
-            <button>Sign in with Access Key</button>
-            <button>Sign in with Google</button>
-            <button>Sign in with Apple</button>
-            <button>Sign in with Coinbase Wallet</button>
+            <button>
+                <img src="google-icon.png" alt="Google Logo">
+                Sign in with Google
+            </button>
+            <button>
+                <img src="apple-icon.png" alt="Apple Logo">
+                Sign in with Apple
+            </button>
+            <button>
+                <img src="wallet-icon.png" alt="Wallet Logo">
+                Sign in with Coinbase Wallet
+            </button>
         </div>
 
         <div class="info-text">
@@ -208,8 +224,6 @@
     <script>
         const continueButton = document.getElementById('continueButton');
         const emailInput = document.getElementById('emailInput');
-        const emailLabel = document.getElementById('emailLabel');
-        const loginContainer = document.getElementById('loginContainer');
 
         continueButton.addEventListener('click', () => {
             const email = emailInput.value.trim();
